@@ -1,40 +1,32 @@
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday"
-];
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
 
-let months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December"
-];
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ];
+  let day = days[date.getDay()];
+  return `${day} ${formatHours(timestamp)}`;
+}
 
-let fullDate = new Date();
-let currentDay = days[fullDate.getDay()];
-let currentMonth = months[fullDate.getMonth()];
-let currentDate = fullDate.getDate();
-let hour = fullDate.getHours();
-let minute = fullDate.getMinutes();
+function formatHours(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
 
-let date = document.querySelector("#current-date");
-let time = document.querySelector("#current-time");
-
-date.innerHTML = `${currentDay}, ${currentMonth} ${currentDate}, ${fullDate.getFullYear()}`;
-time.innerHTML = `${hour}:${minute}`;
+  return `${hours}:${minutes}`;
+}
 
 function displayTemperature(response) {
   let temperatureElement = document.querySelector("#temperature");
@@ -133,5 +125,4 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 
 search("Boulder");
-
 
